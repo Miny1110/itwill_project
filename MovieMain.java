@@ -19,11 +19,10 @@ public class MovieMain {
 	public static void main(String[] args) {	//여러 곳에서 쓰일 데이터 객체생성을 main절에 하기
 		
 		List<MyPageVO> lists = new ArrayList<>();
-		List<Ticket1VO> listsT1 = new ArrayList<>();
 
 		
-		StartPageImpl spi = new StartPageImpl(lists);	//그 데이터를 쓸 클래스 객체생성해서 데이터 보내는거 나타내기
-		Ticket1Impl tki = new Ticket1Impl(listsT1);	//메인에서 선언하고 티켓임플리로 보내서 데이터를 담고 다른데로 보내기
+		StartPageImpl spi=new StartPageImpl(lists);	//그 데이터를 쓸 클래스 객체생성해서 데이터 보내는거 나타내기
+		TicketImpl tki=new TicketImpl();	//메인에서 선언하고 티켓임플리로 보내서 데이터를 담고 다른데로 보내기
 		
 		int ch;
 			
