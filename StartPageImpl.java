@@ -91,8 +91,7 @@ public class StartPageImpl implements StartPage {
 	@Override
 	public void login() {
 
-		Ticket1Impl tki = new Ticket1Impl();
-		MyPageImpl mpi = new MyPageImpl();
+		TicketImpl tki = new TicketImpl();
 
 		
 		Iterator<MyPageVO> it = lists.iterator();	//이터레이터 만들기
@@ -130,8 +129,10 @@ public class StartPageImpl implements StartPage {
 			System.out.println("[로그인완료]" + checkID + "님 반갑습니다.");
 			System.out.println("-------------------------------------");
 
+			tki.input();
+			
 			while (true) {
-				System.out.println("1.영화정보 2.영화예매 3.마이페이지 4.로그아웃");
+				System.out.println("1.영화정보 2.영화예매 3.예매확인 4.예매취소 5.로그아웃");
 				int ch = sc.nextInt();
 				
 				
@@ -139,9 +140,10 @@ public class StartPageImpl implements StartPage {
 				switch (ch) {
 				case 1:
 					break;
-				case 2: tki.choice(); break;
-				case 3: mpi.mypageMain(vo); break;
-				case 4: mpi.logout(); break;
+				case 2: tki.todayMovie(); break;
+				case 3: tki.checkBooking(); break;
+				case 4: tki.cancleBooking(); break;
+				case 5: System.out.println("로그아웃되었습니다"); System.exit(0);; break;
 
 				default:
 					System.out.println("잘못된 선택입니다.");
