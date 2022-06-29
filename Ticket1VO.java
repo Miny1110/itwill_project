@@ -52,7 +52,7 @@ public class Ticket1VO {
 
 	public void print() {
 		
-		System.out.println(movie);
+		System.out.println(movie + " (" + inwon + "명: " + getTot() + ")");
 		for(int i=0;i<inwon;i++) {
 			System.out.printf("좌석: %s", seat);
 		}
