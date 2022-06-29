@@ -1,4 +1,4 @@
-package project1;
+package Project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 
-public class MovieMain {
-	
+public class MovieMain extends Thread {
 
 	String id;
 	String checkID;
@@ -16,7 +15,10 @@ public class MovieMain {
 	
 	static Scanner sc=new Scanner(System.in);
 
-	public static void main(String[] args) {	//여러 곳에서 쓰일 데이터 객체생성을 main절에 하기
+	public static void main(String[] args) throws Exception {	//여러 곳에서 쓰일 데이터 객체생성을 main절에 하기
+		
+		Image im = new Image();
+		im.startImage();
 		
 		List<MyPageVO> lists = new ArrayList<>();
 
@@ -30,7 +32,7 @@ public class MovieMain {
 		while(true) {
 			do{
 				System.out.println();
-				System.out.println("[메가박스] ");
+				System.out.println("[CGV] ");
 				System.out.println("서비스를 이용하시려면 로그인이 필요합니다.");
 				System.out.println("1.로그인 2.회원가입");
 				ch=sc.nextInt();
