@@ -6,134 +6,158 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class TicketImpl implements Ticket{
+public class TicketImpl {
 
-	String[] theaterArr = {"강남","역삼","상봉"};
-	String[] dateArr = {"6/30","7/1","7/2","7/3","7/4","7/5","7/6"};
-	String[] timeArr = {"11:00","12:50","15:40","18:50"};
 	String[] movieArr = {"탑건:매버릭","범죄도시2","마녀 part 2","브로커","버즈 라이트 이어","쥬라기월드:도미니언","헤어질 결심","미친능력","고스트랜드","보통의 용기","컴온컴온"};
 
+	Random rd = new Random();
+	Scanner sc = new Scanner(System.in);
 
-	private List<DataVO> listsMovie = new ArrayList<>(); //영화상영 시간표를 넣을 리스트생성
-	Random rd = new Random(); //movieArr 랜덤 추출
-	List<TicketVO> listsTheater = new ArrayList<>();
+	DataVO data = new DataVO();
+	MyPageVO vo = new MyPageVO();
+	
+	String str1;
+	String[] str2;
+	boolean flag = false;
 
-	int i,j,k;
+	List<TicketVO> listsT1 = new ArrayList<>();
 
-	public TicketImpl() { //생성자
 
-		for(i=0;i<theaterArr.length;i++) {
-			for(j=0;j<dateArr.length;j++) {
-				for(k=0;k<timeArr.length;k++) {
+	public void input() {
 
-					int n = rd.nextInt(movieArr.length);
-
-					DataVO data = new DataVO(); //객체 생성해서
-					data.setTheater(theaterArr[i]); //데이터 넣고
-					data.setDate(dateArr[j]);
-					data.setTime(timeArr[k]);
-					data.setMovie(movieArr[n]);
-
-					listsMovie.add(data); //데이터가 들어간 클래스를 리스트에 넣는다.
-				}
-			}
-		}
-
-		/*
-		Iterator<Data> it = listsMovie.iterator();
-		while(it.hasNext()) {
-			Data data = it.next();
-			System.out.println(data.toString());
-		}*/
+		int n = rd.nextInt(movieArr.length);
+		data.setMovie(movieArr[n]);
 
 	}
 
-	//------------------------------------------------------------------------------------------	
 
-	Scanner sc = new Scanner(System.in);
-	int ch;
+	public void todayMovie() {
 
-	public void choice() { //사용자가 예매방법을 선택한다.
+		System.out.println("오늘의 영화 [" + data.getMovie() + "]");
+		System.out.println("예매하시겠습니까? [1.예 | 2.아니요]");
 
-		do {
-			System.out.println("예매방법을 선택하세요");
-			System.out.print("1.상영관예매 2.영화예매 3.날짜예매  ");
-
-			ch = sc.nextInt();
-
-		}while(ch<0 || ch>3); //입력값이 0미만이거나 3초과면 다시 질문한다.
+		int ch = sc.nextInt();
 
 		switch(ch) {
 
-		case 1: theater(); break; //상영관예매
-		case 2: movie(); break; //영화예매
-		case 3: date(); break; //날짜예매
+		case 1:
+			yes(); break;
+		case 2:
+			System.out.println("영화예매 서비스를 종료합니다"); break;
 
 		}
 	}
 
 
-	@Override
-	public void theater() { //영화관예매
+	public void yes() {
+
 		
-		List<DataVO> tLists = new ArrayList<>(); //사용자의 입력조건에 맞는 영화목록을 담을 리스트
-		TicketVO voT = new TicketVO(); //사용자의 입력값을 넣을 TicketVO 객체생성
-		int j = 1;
+		TicketVO voT1 = new TicketVO();
 
-		System.out.println("영화관을 선택하세요");
-		for(int i=0;i<theaterArr.length;i++) { //영화관 목록 출력
-			System.out.printf("%d.%s  ", i+1, theaterArr[i]);
-		}
-		voT.setTheater(theaterArr[sc.nextInt()-1]);
+		do {
+			System.out.println("인원을 입력하세요");
+			voT1.setInwon(sc.nextInt());
+		}while(voT1.getInwon()<0);
 
-		System.out.println("날짜를 선택하세요");
-		for(int i=0;i<dateArr.length;i++) { //날짜 목록 출력
-			System.out.printf("%d.%s  ", i+1, dateArr[i]);
-		}
-		voT.setDate(dateArr[sc.nextInt()-1]);
-
-		System.out.println("영화를 선택하세요"); //영화 목록 출력
-		Iterator<DataVO> it = listsMovie.iterator(); //DataVO 리스트에서 데이터를 가져온다.
-		while(it.hasNext()) {
-			DataVO voD = it.next();
-			if(voT.getTheater().equals(voD.getTheater()) && voT.getDate().equals(voD.getDate())) {
-				tLists.add(voD);
-				System.out.println(j + "." + voD.toString());
-				j++;
-			}
-		}
-		int n = sc.nextInt();
+		System.out.printf("[총인원 %d명]\n",voT1.getInwon());
 		
-		System.out.print("인원을 입력하세요");
-		voT.setInwon(sc.nextInt());
-
-		for(int i=1;i<=voT.getInwon();i++) {
-			System.out.print("좌석열을 선택하세요(1~10)");
-			voT.setSeatRow(sc.nextInt());
+		
+		str2  = new String[voT1.getInwon()];
+		
+		
+		System.out.println("[1]번째 좌석을 입력하세요(열-번호:1-10)");
+		str2[0] = sc.next();
+		
+		int i = 1;
+		while(i<voT1.getInwon()) {
 			
-			System.out.print("좌석번호를 선택하세요(1~10)");
-			voT.setSeatNum(sc.nextInt());
+			System.out.println("[" + (i+1) + "]번째 좌석을 입력하세요(열-번호:1-10)");
+			str1 = sc.next();
+			
+			if (!str1.equals(str2[i-1])) {
+				str2[i] = str1;
+				i++;
+			}else if(str1.equals(str2[i-1])){
+				System.out.println("이미 선택된 좌석입니다");
+			}
+			
 		}
 
-		System.out.printf("결제방법을 선택하세요[1.카드/2.현금] (금액: %d)\n", voT.getTot());
-		voT.setPay(sc.nextInt());
+		voT1.setSeat(str2);
 		
+
+		System.out.printf("결제방법을 선택하세요[1.카드/2.현금] (총금액: %d)\n", voT1.getTot());
+		voT1.setPay(sc.nextInt());
+
 		System.out.println("예매 완료!");
-		listsTheater.add(voT);
-	}
+		System.out.println("-------------------------------------");
+		listsT1.add(voT1);
+		
+		
 
-	@Override
-	public void movie() {
-	}
-
-	@Override
-	public void date() {
 	}
 
 
-	public static void main(String[] args) {
-		TicketImpl impl = new TicketImpl();
-		impl.choice();
-		impl.theater();
+	public void checkBooking() {
+		
+			Iterator<TicketVO> it = listsT1.iterator();
+			while(it.hasNext()) {
+				TicketVO vo = it.next();
+				print();
+			}
+			if(flag) {
+				System.out.println("예매내역이 없습니다");
+				System.out.println("-------------------------------------");
+			}
+		
 	}
+	
+	
+	
+	public void cancleBooking() {
+	
+		System.out.println("취소하시겠습니까? [yes/no]");
+		String a=sc.next();
+		
+		Iterator<TicketVO> it = listsT1.iterator();
+		while(it.hasNext()) {
+			TicketVO vo = it.next();
+			if(a.equals("yes")) {
+				listsT1.remove(vo);
+				System.out.println("취소되었습니다.");
+				System.out.println("-------------------------------------");
+				flag = true;
+				break;
+			}else {
+				System.out.println("종료합니다.");
+				System.out.println("-------------------------------------");
+				break;
+			}
+
+		}
+		
+		
+	}
+	
+	
+	
+	
+	public void print() {
+		
+		TicketVO voT1 = new TicketVO();
+		
+		System.out.print("예매좌석[열-번호]: ");
+		
+		for(int i=0;i<str2.length;i++) {
+			System.out.print(str2[i] + " | ");
+		}
+		
+		System.out.println();
+		System.out.println("-------------------------------------");
+		
+		
+	}
+	
+	
+
 }
