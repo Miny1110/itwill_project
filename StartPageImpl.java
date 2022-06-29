@@ -1,4 +1,4 @@
-package project1;
+package Project;
 
 
 import java.util.ArrayList;
@@ -13,6 +13,15 @@ public class StartPageImpl implements StartPage {
 	
 	private List<MyPageVO> lists = null;	//list선언-main절에서 보내주는 list데이터 받을 곳 생성
 	Scanner sc = new Scanner(System.in);
+	
+
+	TicketImpl tki = new TicketImpl();
+	MovieInfoMain mim = new MovieInfoMain();
+	
+	public StartPageImpl ( ) {
+		
+	}
+
 
 
 	public StartPageImpl(List<MyPageVO> lists) {	//기본생성자 만들어주기. 데이터 어떻게 처리할건지 startpageimpl list를 변수로 받는다
@@ -20,7 +29,7 @@ public class StartPageImpl implements StartPage {
 	}
 
 	@Override
-	public void input() {
+	public void input() throws Exception {
 
 		MyPageVO vo = new MyPageVO();	//vo 선언&객체생성	list타입을 받았으니까 vo만들고 사용하기 가능
 
@@ -80,6 +89,7 @@ public class StartPageImpl implements StartPage {
 		lists.add(vo);	//list생성
 
 		System.out.println("회원가입이 완료되었습니다. 가입축하적립금 500P를 드렸습니다.");
+		System.out.println();
 		System.out.println("로그인 페이지로 이동합니다.");
 
 		System.out.println("----------------------------");
@@ -89,9 +99,9 @@ public class StartPageImpl implements StartPage {
 	}
 
 	@Override
-	public void login() {
+	public void login() throws Exception {
 
-		TicketImpl tki = new TicketImpl();
+		
 
 		
 		Iterator<MyPageVO> it = lists.iterator();	//이터레이터 만들기
@@ -130,27 +140,55 @@ public class StartPageImpl implements StartPage {
 			System.out.println("-------------------------------------");
 
 			tki.input();
+			start();
 			
-			while (true) {
-				System.out.println("1.영화정보 2.영화예매 3.예매확인 4.예매취소 5.로그아웃");
-				int ch = sc.nextInt();
-				
-				
-
-				switch (ch) {
-				case 1:
-					break;
-				case 2: tki.todayMovie(); break;
-				case 3: tki.checkBooking(); break;
-				case 4: tki.cancleBooking(); break;
-				case 5: System.out.println("로그아웃되었습니다"); System.exit(0);; break;
-
-				default:
-					System.out.println("잘못된 선택입니다.");
-					System.exit(0);
-				}
+		}
+	}
+	
+	public void start() throws Exception {
+		while (true) {
+			System.out.println("1.영화정보 2.영화예매 3.예매확인 4.예매취소 5.로그아웃");
+			int ch = sc.nextInt();
+			
+			switch (ch) {
+			case 1: mim.movieInfo(); break;
+			case 2: tki.todayMovie(); break;
+			case 3: tki.checkBooking(); break;
+			case 4: tki.cancleBooking(); break;
+			case 5: System.out.println("로그아웃되었습니다"); 
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
+			String Main[] = {
 
+					
+					"\t\t\t _____                    _  ______              " , 
+					"\t\t\t|  __ \\                  | | | ___ \\             " , 
+					"\t\t\t| |  \\/  ___    ___    __| | | |_/ / _   _   ___ " , 
+					"\t\t\t| | __  / _ \\  / _ \\  / _` | | ___ \\| | | | / _ \\" , 
+					"\t\t\t| |_\\ \\| (_) || (_) || (_| | | |_/ /| |_| ||  __/" , 
+					"\t\t\t \\____/ \\___/  \\___/  \\__,_| \\____/  \\__, | \\___|" , 
+					"\t\t\t                                      __/ |      " , 
+					"\t\t\t                                     |___/       " , 
+					""
+					
+					};
+
+			for(int i=0; i<Main.length; i++) {
+
+				System.out.println(Main[i]);
+
+				Thread.sleep(200);
+			}
+			System.exit(0);
+			break;
+
+			default:
+				System.out.println("잘못된 선택입니다.");
+				System.exit(0);
+			}
 		}
 	}
 
