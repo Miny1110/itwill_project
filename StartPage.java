@@ -1,9 +1,9 @@
-package project1;
+package Project;
 
 public interface StartPage {
 	
-	public void input();
-	public void login();
+	public void input() throws Exception;
+	public void login() throws Exception;
 	
 
 }
