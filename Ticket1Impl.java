@@ -110,10 +110,53 @@ public class Ticket1Impl implements Ticket{
 		n = sc.nextInt(); //사용자가 입력한 영화 번호
 		voT1.setMovie(listsMovie2.get(n-1).toString()); //listsMovie2에서 사용자가 입력한 번호번째 데이터를 voT.setMoive에 대입
 		
+		//listsT1.add(voT1);
+		
+		//inputUserChoice2VO();
+		
+		//Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
+		String str;
+		
+		do {
+			System.out.print("***인원을 입력하세요***");
+			voT1.setInwon(sc.nextInt());
+		}while(voT1.getInwon()<0);
+
+		System.out.printf("***[총인원 %d명]***\n",voT1.getInwon());
+
+		
+		for(int i=1;i<=voT1.getInwon();i++) {
+
+			do {
+				
+			System.out.print("***[" + i + "]번째 좌석을 입력하세요(열-번호:1-10)***");
+			str = sc.next();
+			
+			}while (!Pattern.matches("[0-9]+-[0-9]+", str));
+			
+			
+			if(listsT2.contains(str)) {
+				System.out.println("이미 선택된 좌석입니다");
+				i--;
+			}
+			voT1.setSeat(str);
+			listsT2.add(str);
+		}
+		
+		System.out.printf("***결제방법을 선택하세요[1.카드/2.현금] (총금액: %d)***\n", voT1.getTot());
+		voT1.setPay(sc.nextInt());
+
+		System.out.println("***예매 완료!***");
+		
 		listsT1.add(voT1);
 		
-		inputUserChoice2VO();
-		
+		/*
+		Iterator<Ticket1VO> it5 = listsT1.iterator();
+		while(it5.hasNext()) {
+			Ticket1VO vovo = it5.next();
+			vovo.print();
+		}
+		*/
 	}
 
 	@Override
@@ -149,9 +192,45 @@ public class Ticket1Impl implements Ticket{
 		n = sc.nextInt(); //사용자가 입력한 영화 번호
 		voT1.setDate(listsMovie2.get(n-1).toString()); //listsMovie2에서 사용자가 입력한 번호번째 데이터를 voT.setDate에 대입
 		
-		listsT1.add(voT1);
+		//listsT1.add(voT1);
 		
-		inputUserChoice2VO();
+		//inputUserChoice2VO();
+		
+		//Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
+		String str;
+		
+		do {
+			System.out.print("***인원을 입력하세요***");
+			voT1.setInwon(sc.nextInt());
+		}while(voT1.getInwon()<0);
+
+		System.out.printf("***[총인원 %d명]***\n",voT1.getInwon());
+
+		
+		for(int i=1;i<=voT1.getInwon();i++) {
+
+			do {
+				
+			System.out.print("***[" + i + "]번째 좌석을 입력하세요(열-번호:1-10)***");
+			str = sc.next();
+			
+			}while (!Pattern.matches("[0-9]+-[0-9]+", str));
+			
+			
+			if(listsT2.contains(str)) {
+				System.out.println("이미 선택된 좌석입니다");
+				i--;
+			}
+			voT1.setSeat(str);
+			listsT2.add(str);
+		}
+		
+		System.out.printf("***결제방법을 선택하세요[1.카드/2.현금] (총금액: %d)***\n", voT1.getTot());
+		voT1.setPay(sc.nextInt());
+
+		System.out.println("***예매 완료!***");
+		
+		listsT1.add(voT1);
 		
 	}
 
@@ -188,13 +267,49 @@ public class Ticket1Impl implements Ticket{
 		n = sc.nextInt(); //사용자가 입력한 영화 번호
 		voT1.setMovie(listsMovie2.get(n-1).toString()); //listsMovie2에서 사용자가 입력한 번호번째 데이터를 voT.setMoive에 대입
 		
-		listsT1.add(voT1);
+		//listsT1.add(voT1);
 		
-		inputUserChoice2VO();
+		//inputUserChoice2VO();
+		
+		//Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
+		String str;
+		
+		do {
+			System.out.print("***인원을 입력하세요***");
+			voT1.setInwon(sc.nextInt());
+		}while(voT1.getInwon()<0);
+
+		System.out.printf("***[총인원 %d명]***\n",voT1.getInwon());
+
+		
+		for(int i=1;i<=voT1.getInwon();i++) {
+
+			do {
+				
+			System.out.print("***[" + i + "]번째 좌석을 입력하세요(열-번호:1-10)***");
+			str = sc.next();
+			
+			}while (!Pattern.matches("[0-9]+-[0-9]+", str));
+			
+			
+			if(listsT2.contains(str)) {
+				System.out.println("이미 선택된 좌석입니다");
+				i--;
+			}
+			voT1.setSeat(str);
+			listsT2.add(str);
+		}
+		
+		System.out.printf("***결제방법을 선택하세요[1.카드/2.현금] (총금액: %d)***\n", voT1.getTot());
+		voT1.setPay(sc.nextInt());
+
+		System.out.println("***예매 완료!***");
+		
+		listsT1.add(voT1);
 		
 	}
 	
-	
+	/*
 	public void inputUserChoice2VO() {
 
 		Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
@@ -243,7 +358,7 @@ public class Ticket1Impl implements Ticket{
 		}
 		*/
 		
-	}
+	//}
 	
 	/*
 	public void print() {
