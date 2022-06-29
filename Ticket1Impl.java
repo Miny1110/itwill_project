@@ -17,14 +17,15 @@ public class Ticket1Impl implements Ticket{
 
 	private List<DataVO> listsMovie = new ArrayList<>(); //영화상영 시간표를 넣을 리스트생성
 	Random rd = new Random(); //movieArr 랜덤 추출
-	List<Ticket1VO> listsT1 = new ArrayList<>(); //Ticket1VO 타입 클래스 정보를 넣을 리스트 (사용자가 입력한 영화관, 날짜, 영화가 있다.)
+	
+	List<Ticket1VO> listsT1; //Ticket1VO 타입 클래스 정보를 넣을 리스트 (사용자가 입력한 영화관, 날짜, 영화가 있다.)
 	List<String> listsT2 = new ArrayList<>(); //좌석정보를 넣을 리스트 생성
 
 	int i,j,k;
 	int n;
 
-	public Ticket1Impl() { //생성자
-
+	public Ticket1Impl() {
+		
 		for(i=0;i<theaterArr.length;i++) {
 			for(j=0;j<dateArr.length;j++) {
 				for(k=0;k<timeArr.length;k++) {
@@ -32,6 +33,7 @@ public class Ticket1Impl implements Ticket{
 					int n = rd.nextInt(movieArr.length);
 
 					DataVO data = new DataVO(); //객체 생성해서
+					
 					data.setTheater(theaterArr[i]); //데이터 넣고
 					data.setDate(dateArr[j]);
 					data.setTime(timeArr[k]);
@@ -41,6 +43,14 @@ public class Ticket1Impl implements Ticket{
 				}
 			}
 		}
+		
+	};
+	
+	public Ticket1Impl(List<Ticket1VO> pList) { //생성자
+		
+		listsT1 = (List<Ticket1VO>) pList;
+
+
 
 		
 		/*
@@ -49,8 +59,15 @@ public class Ticket1Impl implements Ticket{
 			DataVO data = it.next();
 			System.out.println(data.toString());
 		}
-		 */
+		*/ 
 	}
+	
+	
+//	public Ticket1Impl(List<Ticket1VO> listsT1) {
+//		this.listsT1 = listsT1;
+//	}
+	
+	
 
 	//------------------------------------------------------------------------------------------	
 
@@ -97,12 +114,15 @@ public class Ticket1Impl implements Ticket{
 		voT1.setDate(dateArr[sc.nextInt()-1]);
 
 		System.out.println("***영화를 선택하세요***"); //영화 목록 출력
+		
 		Iterator<DataVO> it = listsMovie.iterator(); //listsMovie 리스트에서 데이터를 가져온다.
 		while(it.hasNext()) {
 			DataVO voD = it.next();
 			if(voT1.getTheater().equals(voD.getTheater()) && voT1.getDate().equals(voD.getDate())) {
 				listsMovie2.add(voD);
-				System.out.println(j + "." + voD.toString()); //입력날짜,시간의 영화목록 출력
+				System.out.println(j + "." + voD.toString());
+				
+				//입력날짜,시간의 영화목록 출력
 				j++;
 			}
 		}
@@ -110,11 +130,6 @@ public class Ticket1Impl implements Ticket{
 		n = sc.nextInt(); //사용자가 입력한 영화 번호
 		voT1.setMovie(listsMovie2.get(n-1).toString()); //listsMovie2에서 사용자가 입력한 번호번째 데이터를 voT.setMoive에 대입
 		
-		//listsT1.add(voT1);
-		
-		//inputUserChoice2VO();
-		
-		//Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
 		String str;
 		
 		do {
@@ -157,6 +172,7 @@ public class Ticket1Impl implements Ticket{
 			vovo.print();
 		}
 		*/
+		
 	}
 
 	@Override
@@ -192,11 +208,6 @@ public class Ticket1Impl implements Ticket{
 		n = sc.nextInt(); //사용자가 입력한 영화 번호
 		voT1.setDate(listsMovie2.get(n-1).toString()); //listsMovie2에서 사용자가 입력한 번호번째 데이터를 voT.setDate에 대입
 		
-		//listsT1.add(voT1);
-		
-		//inputUserChoice2VO();
-		
-		//Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
 		String str;
 		
 		do {
@@ -267,11 +278,6 @@ public class Ticket1Impl implements Ticket{
 		n = sc.nextInt(); //사용자가 입력한 영화 번호
 		voT1.setMovie(listsMovie2.get(n-1).toString()); //listsMovie2에서 사용자가 입력한 번호번째 데이터를 voT.setMoive에 대입
 		
-		//listsT1.add(voT1);
-		
-		//inputUserChoice2VO();
-		
-		//Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
 		String str;
 		
 		do {
@@ -309,72 +315,6 @@ public class Ticket1Impl implements Ticket{
 		
 	}
 	
-	/*
-	public void inputUserChoice2VO() {
-
-		Ticket1VO voT1 = new Ticket1VO(); //입력값을 넣을 객체 생성
-		String str;
-		
-		do {
-			System.out.print("***인원을 입력하세요***");
-			voT1.setInwon(sc.nextInt());
-		}while(voT1.getInwon()<0);
-
-		System.out.printf("***[총인원 %d명]***\n",voT1.getInwon());
-
-		
-		for(int i=1;i<=voT1.getInwon();i++) {
-
-			do {
-				
-			System.out.print("***[" + i + "]번째 좌석을 입력하세요(열-번호:1-10)***");
-			str = sc.next();
-			
-			}while (!Pattern.matches("[0-9]+-[0-9]+", str));
-			
-			
-			if(listsT2.contains(str)) {
-				System.out.println("이미 선택된 좌석입니다");
-				i--;
-			}
-			voT1.setSeat(str);
-			listsT2.add(str);
-		}
-		
-		System.out.printf("***결제방법을 선택하세요[1.카드/2.현금] (총금액: %d)***\n", voT1.getTot());
-		voT1.setPay(sc.nextInt());
-
-		System.out.println("***예매 완료!***");
-		
-		listsT1.add(voT1);
-		
-		/*
-		System.out.printf("%s %d명\n", voT1.getMovie(), voT1.getInwon());
-		
-		Iterator<String> it4 = listsT2.iterator();
-		while(it4.hasNext()) {
-			String vo = it4.next();
-			System.out.printf("좌석(열-번호): %s\n",vo);
-		}
-		*/
-		
-	//}
-	
-	/*
-	public void print() {
-		
-		Ticket1VO voT1 = new Ticket1VO();
-		
-		System.out.printf("%s %d명\n", voT1.getMovie(), voT1.getInwon());
-		
-		Iterator<String> it4 = listsT2.iterator();
-		while(it4.hasNext()) {
-			String vo = it4.next();
-			System.out.printf("좌석(열-번호): %s\n",vo);
-		}
-		
-	}
-	*/
 	/*
 	public static void main(String[] args) {
 		Ticket1Impl impl = new Ticket1Impl();
