@@ -1,5 +1,8 @@
 package project1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyPageVO {
 	
 	
@@ -10,6 +13,27 @@ public class MyPageVO {
 	private int point;
 	private String level;
 	private int moviecount;
+	
+	
+	
+	List<TicketVO> listsT1 = new ArrayList<>();
+	List<String> listsT2 = new ArrayList<>();
+	
+	
+	public List<TicketVO> getListsT1() {
+		return listsT1;
+	}
+	public void setListsT1(List<TicketVO> listsT1) {
+		this.listsT1 = listsT1;
+	}
+	public List<String> getListsT2() {
+		return listsT2;
+	}
+	public void setListsT2(List<String> listsT2) {
+		this.listsT2 = listsT2;
+	}
+	
+	
 	
 	
 	
