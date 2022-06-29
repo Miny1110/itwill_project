@@ -1,4 +1,4 @@
-package project1;
+package Project;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +18,7 @@ public class TicketImpl {
 	
 	String str1;
 	String[] str2;
-	boolean flag = false;
+	boolean flag;
 
 	List<TicketVO> listsT1 = new ArrayList<>();
 
@@ -32,8 +32,10 @@ public class TicketImpl {
 
 
 	public void todayMovie() {
+		
+		input();
 
-		System.out.println("오늘의 영화 [" + data.getMovie() + "]");
+		System.out.println("랜덤 영화 [" + data.getMovie() + "]");
 		System.out.println("예매하시겠습니까? [1.예 | 2.아니요]");
 
 		int ch = sc.nextInt();
@@ -47,7 +49,6 @@ public class TicketImpl {
 
 		}
 	}
-
 
 	public void yes() {
 
